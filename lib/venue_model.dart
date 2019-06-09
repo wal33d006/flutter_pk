@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter_pk/helpers/formatters.dart';
+import 'package:waqareazadi/helpers/formatters.dart';
 
 class EventDetails {
   final String date;

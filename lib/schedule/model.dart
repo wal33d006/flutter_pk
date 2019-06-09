@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter_pk/global.dart';
-import 'package:flutter_pk/util.dart';
+import 'package:waqareazadi/global.dart';
+import 'package:waqareazadi/util.dart';
 
 class ScheduleApi {
   Future<List<Session>> getSessionList() async {

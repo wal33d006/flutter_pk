@@ -2,11 +2,11 @@ import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_pk/feedback/feedback.dart';
-import 'package:flutter_pk/global.dart';
-import 'package:flutter_pk/schedule/model.dart';
+import 'package:waqareazadi/feedback/feedback.dart';
+import 'package:waqareazadi/global.dart';
+import 'package:waqareazadi/schedule/model.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter_pk/theme.dart';
+import 'package:waqareazadi/theme.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
 class SessionDetailPage extends StatelessWidget {

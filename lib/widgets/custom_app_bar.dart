@@ -1,9 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_pk/global.dart';
-import 'package:flutter_pk/helpers/formatters.dart';
-import 'package:flutter_pk/profile/profile_dialog.dart';
-import 'package:flutter_pk/util.dart';
+import 'package:waqareazadi/global.dart';
+import 'package:waqareazadi/helpers/formatters.dart';
+import 'package:waqareazadi/profile/profile_dialog.dart';
+import 'package:waqareazadi/util.dart';
 
 class CustomAppBar extends StatefulWidget {
   final String title;

@@ -3,15 +3,15 @@ import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_pk/caches/user.dart';
-import 'package:flutter_pk/venue_detail.dart';
-import 'package:flutter_pk/global.dart';
+import 'package:waqareazadi/caches/user.dart';
+import 'package:waqareazadi/venue_detail.dart';
+import 'package:waqareazadi/global.dart';
 import 'package:barcode_scan/barcode_scan.dart';
-import 'package:flutter_pk/registration/registration.dart';
-import 'package:flutter_pk/widgets/full_screen_loader.dart';
+import 'package:waqareazadi/registration/registration.dart';
+import 'package:waqareazadi/widgets/full_screen_loader.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
-import 'package:flutter_pk/schedule/schedule_page.dart';
+import 'package:waqareazadi/schedule/schedule_page.dart';
 
 class HomePageMaster extends StatefulWidget {
   @override

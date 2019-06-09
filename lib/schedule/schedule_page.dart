@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_pk/helpers/formatters.dart';
-import 'package:flutter_pk/schedule/model.dart';
-import 'package:flutter_pk/schedule/session_detail.dart';
-import 'package:flutter_pk/theme.dart';
-import 'package:flutter_pk/widgets/custom_app_bar.dart';
+import 'package:waqareazadi/helpers/formatters.dart';
+import 'package:waqareazadi/schedule/model.dart';
+import 'package:waqareazadi/schedule/session_detail.dart';
+import 'package:waqareazadi/theme.dart';
+import 'package:waqareazadi/widgets/custom_app_bar.dart';
 import 'package:progress_indicators/progress_indicators.dart';
 
 class SchedulePage extends StatefulWidget {

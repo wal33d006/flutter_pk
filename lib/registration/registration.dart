@@ -1,10 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_pk/global.dart';
-import 'package:flutter_pk/helpers/regex-helpers.dart';
-import 'package:flutter_pk/widgets/dots_indicator.dart';
+import 'package:waqareazadi/global.dart';
+import 'package:waqareazadi/helpers/regex-helpers.dart';
+import 'package:waqareazadi/widgets/dots_indicator.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
-import 'package:flutter_pk/widgets/full_screen_loader.dart';
+import 'package:waqareazadi/widgets/full_screen_loader.dart';
 
 class RegistrationPage extends StatefulWidget {
   @override
