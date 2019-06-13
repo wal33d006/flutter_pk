@@ -22,9 +22,10 @@ class RegistrationPageState extends State<RegistrationPage> {
   FocusNode focusNode = FocusNode();
   TextEditingController mobileNumberController = TextEditingController();
   TextEditingController designationController = TextEditingController();
-  TextEditingController studentProfessionalController = TextEditingController();
+  TextEditingController fullNameController = TextEditingController();
   int pageViewItemCount = 3;
   bool _isStudent = false;
+  bool _isSinger = false;
   bool _isLoading = false;
 
   @override
@@ -65,16 +66,12 @@ class RegistrationPageState extends State<RegistrationPage> {
                   child: PageView(
                     controller: controller,
                     children: <Widget>[
-                      userCache.user.mobileNumber == null
-                          ? _buildNumberSetupView(
-                              context,
-                              GlobalConstants.addNumberDisplayText,
-                            )
-                          : _buildNumberSetupView(
-                              context,
-                              GlobalConstants.editNumberDisplayText,
-                            ),
-                      _buildStudentProfessionalView(),
+                      _buildSpeechSongSelectionView(),
+                      _buildNumberSetupView(
+                        context,
+                        GlobalConstants.addNumberDisplayText,
+                      ),
+//                      _buildStudentProfessionalView(),
                       _buildWorkInstituteEntryView(),
                       _buildDesignationEntryView()
                     ],
@@ -94,6 +91,146 @@ class RegistrationPageState extends State<RegistrationPage> {
         ),
         _isLoading ? FullScreenLoader() : Container()
       ],
+    );
+  }
+
+  Center _buildSpeechSongSelectionView() {
+    return Center(
+      child: SingleChildScrollView(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Center(
+//              child: SizedBox(
+//                height: 100.0,
+//                child: Image(
+//                  image: AssetImage('assets/logoWithShadow.jpg'),
+//                ),
+//              ),
+//              IconTheme(
+//                data: IconThemeData(color: Colors.blueGrey),
+//                child: Row(
+//                  mainAxisAlignment: MainAxisAlignment.center,
+//                  children: <Widget>[
+//                    Icon(
+//                      Icons.music_note,
+//                      size: 48.0,
+//                    ),
+//                    SizedBox(width: 8),
+//                    Icon(
+//                      Icons.laptop_mac,
+//                      size: 80.0,
+//                    ),
+//                    SizedBox(width: 8),
+//                    Icon(
+//                      Icons.mic,
+//                      size: 48.0,
+//                    ),
+//                  ],
+//                ),
+//              ),
+                ),
+            Padding(
+              padding: const EdgeInsets.only(
+                top: 16.0,
+                bottom: 16.0,
+                left: 32.0,
+                right: 32.0,
+              ),
+              child: Text(
+                'Which one do you want to participate in?',
+                textAlign: TextAlign.center,
+                style: Theme.of(context).textTheme.title,
+              ),
+            ),
+            ButtonBar(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                Column(
+                  children: <Widget>[
+                    Icon(
+                      Icons.music_note,
+                      size: 48.0,
+                      color: Theme.of(context).primaryColor,
+                    ),
+                    RaisedButton(
+                      padding: const EdgeInsets.symmetric(
+                        vertical: 8.0,
+                        horizontal: 16.0,
+                      ),
+                      child: Text(
+                        'Singing\nCompletition',
+                        textAlign: TextAlign.center,
+                      ),
+                      onPressed: () {
+                        setState(() {
+                          _isSinger = true;
+                        });
+                        controller.animateToPage(1,
+                            duration: Duration(milliseconds: 500),
+                            curve: Curves.fastOutSlowIn);
+                      },
+                    ),
+                  ],
+                ),
+                Column(
+                  children: <Widget>[
+                    Icon(
+                      Icons.mic,
+                      size: 48.0,
+                      color: Theme.of(context).primaryColor,
+                    ),
+                    RaisedButton(
+                      padding: const EdgeInsets.symmetric(
+                        vertical: 8.0,
+                        horizontal: 16.0,
+                      ),
+                      child: Text(
+                        'Speech\nCompetition',
+                        textAlign: TextAlign.center,
+                      ),
+                      onPressed: () {
+                        setState(() {
+                          _isSinger = false;
+                        });
+                        controller.animateToPage(1,
+                            duration: Duration(milliseconds: 500),
+                            curve: Curves.fastOutSlowIn);
+                      },
+                    ),
+                  ],
+                ),
+              ],
+            ),
+//            Divider(),
+//            Row(
+//              children: <Widget>[
+//                Expanded(
+//                  child: FlatButton(
+//                    child: Row(
+//                      mainAxisAlignment: MainAxisAlignment.start,
+//                      children: <Widget>[
+//                        Icon(
+//                          Icons.arrow_back,
+//                          size: 24.0,
+//                        ),
+//                        Text('BACK'),
+//                      ],
+//                    ),
+//                    textColor: Theme.of(context).primaryColor,
+//                    onPressed: () {
+//                      controller.animateToPage(0,
+//                          duration: Duration(milliseconds: 500),
+//                          curve: Curves.fastOutSlowIn);
+//                    },
+//                  ),
+//                )
+//              ],
+//            )
+          ],
+        ),
+      ),
     );
   }
 
@@ -150,113 +287,6 @@ class RegistrationPageState extends State<RegistrationPage> {
                 Expanded(
                   child: FlatButton(
                     child: Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: <Widget>[
-                        Text('NEXT'),
-                        Icon(
-                          Icons.arrow_forward,
-                          size: 24.0,
-                        )
-                      ],
-                    ),
-                    textColor: Theme.of(context).primaryColor,
-                    onPressed: () {
-                      if (_mobileNumberFormKey.currentState.validate()) {
-                        focusNode.unfocus();
-                        controller.animateToPage(1,
-                            duration: Duration(milliseconds: 500),
-                            curve: Curves.fastOutSlowIn);
-                      }
-                    },
-                  ),
-                )
-              ],
-            )
-          ],
-        ),
-      ),
-    );
-  }
-
-  Center _buildStudentProfessionalView() {
-    return Center(
-      child: SingleChildScrollView(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Center(
-              child: IconTheme(
-                data: IconThemeData(color: Colors.blueGrey),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Icon(
-                      Icons.work,
-                      size: 48.0,
-                    ),
-                    SizedBox(width: 8),
-                    Icon(
-                      Icons.laptop_mac,
-                      size: 80.0,
-                    ),
-                    SizedBox(width: 8),
-                    Icon(
-                      Icons.school,
-                      size: 48.0,
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(
-                top: 16.0,
-                bottom: 16.0,
-                left: 32.0,
-                right: 32.0,
-              ),
-              child: Text(
-                'Which one of the following best describes you?',
-                textAlign: TextAlign.center,
-                style: Theme.of(context).textTheme.title,
-              ),
-            ),
-            ButtonBar(
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                RaisedButton(
-                  child: Text('STUDENT'),
-                  onPressed: () {
-                    setState(() {
-                      _isStudent = true;
-                      pageViewItemCount = 3;
-                    });
-                    controller.animateToPage(2,
-                        duration: Duration(milliseconds: 500),
-                        curve: Curves.fastOutSlowIn);
-                  },
-                ),
-                RaisedButton(
-                  child: Text('PROFESSIONAL'),
-                  onPressed: () {
-                    setState(() {
-                      _isStudent = false;
-                      pageViewItemCount = 4;
-                    });
-                    controller.animateToPage(2,
-                        duration: Duration(milliseconds: 500),
-                        curve: Curves.fastOutSlowIn);
-                  },
-                ),
-              ],
-            ),
-            Divider(),
-            Row(
-              children: <Widget>[
-                Expanded(
-                  child: FlatButton(
-                    child: Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: <Widget>[
                         Icon(
@@ -273,6 +303,29 @@ class RegistrationPageState extends State<RegistrationPage> {
                           curve: Curves.fastOutSlowIn);
                     },
                   ),
+                ),
+                Expanded(
+                  child: FlatButton(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: <Widget>[
+                        Text('NEXT'),
+                        Icon(
+                          Icons.arrow_forward,
+                          size: 24.0,
+                        )
+                      ],
+                    ),
+                    textColor: Theme.of(context).primaryColor,
+                    onPressed: () {
+                      if (_mobileNumberFormKey.currentState.validate()) {
+                        focusNode.unfocus();
+                        controller.animateToPage(2,
+                            duration: Duration(milliseconds: 500),
+                            curve: Curves.fastOutSlowIn);
+                      }
+                    },
+                  ),
                 )
               ],
             )
@@ -282,125 +335,299 @@ class RegistrationPageState extends State<RegistrationPage> {
     );
   }
 
-  Center _buildWorkInstituteEntryView() {
-    return Center(
-      child: SingleChildScrollView(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Icon(
-              _isStudent ? Icons.school : Icons.work,
-              size: 100.0,
-              color: Theme.of(context).primaryColor,
+//  Center _buildStudentProfessionalView() {
+//    return Center(
+//      child: SingleChildScrollView(
+//        child: Column(
+//          mainAxisSize: MainAxisSize.min,
+//          mainAxisAlignment: MainAxisAlignment.center,
+//          children: <Widget>[
+//            Center(
+//              child: IconTheme(
+//                data: IconThemeData(color: Colors.blueGrey),
+//                child: Row(
+//                  mainAxisAlignment: MainAxisAlignment.center,
+//                  children: <Widget>[
+//                    Icon(
+//                      Icons.work,
+//                      size: 48.0,
+//                    ),
+//                    SizedBox(width: 8),
+//                    Icon(
+//                      Icons.laptop_mac,
+//                      size: 80.0,
+//                    ),
+//                    SizedBox(width: 8),
+//                    Icon(
+//                      Icons.school,
+//                      size: 48.0,
+//                    ),
+//                  ],
+//                ),
+//              ),
+//            ),
+//            Padding(
+//              padding: const EdgeInsets.only(
+//                top: 16.0,
+//                bottom: 16.0,
+//                left: 32.0,
+//                right: 32.0,
+//              ),
+//              child: Text(
+//                'Which one of the following best describes you?',
+//                textAlign: TextAlign.center,
+//                style: Theme.of(context).textTheme.title,
+//              ),
+//            ),
+//            ButtonBar(
+//              mainAxisSize: MainAxisSize.min,
+//              children: <Widget>[
+//                RaisedButton(
+//                  child: Text('STUDENT'),
+//                  onPressed: () {
+//                    setState(() {
+//                      _isStudent = true;
+//                      pageViewItemCount = 3;
+//                    });
+//                    controller.animateToPage(2,
+//                        duration: Duration(milliseconds: 500),
+//                        curve: Curves.fastOutSlowIn);
+//                  },
+//                ),
+//                RaisedButton(
+//                  child: Text('PROFESSIONAL'),
+//                  onPressed: () {
+//                    setState(() {
+//                      _isStudent = false;
+//                      pageViewItemCount = 4;
+//                    });
+//                    controller.animateToPage(2,
+//                        duration: Duration(milliseconds: 500),
+//                        curve: Curves.fastOutSlowIn);
+//                  },
+//                ),
+//              ],
+//            ),
+//            Divider(),
+//            Row(
+//              children: <Widget>[
+//                Expanded(
+//                  child: FlatButton(
+//                    child: Row(
+//                      mainAxisAlignment: MainAxisAlignment.start,
+//                      children: <Widget>[
+//                        Icon(
+//                          Icons.arrow_back,
+//                          size: 24.0,
+//                        ),
+//                        Text('BACK'),
+//                      ],
+//                    ),
+//                    textColor: Theme.of(context).primaryColor,
+//                    onPressed: () {
+//                      controller.animateToPage(0,
+//                          duration: Duration(milliseconds: 500),
+//                          curve: Curves.fastOutSlowIn);
+//                    },
+//                  ),
+//                )
+//              ],
+//            )
+//          ],
+//        ),
+//      ),
+//    );
+//  }
+
+  Widget _buildWorkInstituteEntryView() {
+    return SingleChildScrollView(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          Icon(
+            Icons.perm_contact_calendar,
+            size: 100.0,
+            color: Theme.of(context).primaryColor,
+          ),
+          ListTile(
+            title: Text(
+              'What is your name?',
+              textAlign: TextAlign.center,
             ),
-            Padding(
-              padding: const EdgeInsets.only(
-                top: 16.0,
-                bottom: 16.0,
-                left: 32.0,
-                right: 32.0,
-              ),
-              child: Text(
-                'Where do you ${_isStudent ? 'study' : 'work'}?',
-                textAlign: TextAlign.center,
-                style: Theme.of(context).textTheme.title,
-              ),
-            ),
-            Form(
-              key: _studentProfessionalFormKey,
-              child: ListTile(
-                title: TextFormField(
-                  focusNode: focusNode,
-                  controller: studentProfessionalController,
-                  maxLength: GlobalConstants.entryMaxLength,
-                  validator: (value) =>
-                      _validateStudentProfessionalEntry(value),
-                  decoration: InputDecoration(
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10.0)),
-                      hintText:
-                          'Enter ${_isStudent ? 'institute' : 'workplace'}',
-                      labelText: '${_isStudent ? 'Institute' : 'Workplace'}'),
-                ),
-              ),
-            ),
-            Divider(),
-            Row(
+          ),
+          Form(
+            key: _studentProfessionalFormKey,
+            child: Column(
               children: <Widget>[
-                Expanded(
-                  child: FlatButton(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: <Widget>[
-                        Icon(
-                          Icons.arrow_back,
-                          size: 24.0,
-                        ),
-                        Text('BACK'),
-                      ],
-                    ),
-                    textColor: Theme.of(context).primaryColor,
-                    onPressed: () {
-                      controller.animateToPage(1,
-                          duration: Duration(milliseconds: 500),
-                          curve: Curves.fastOutSlowIn);
-                    },
+                ListTile(
+                  title: TextFormField(
+                    focusNode: focusNode,
+                    controller: fullNameController,
+                    maxLength: GlobalConstants.entryMaxLength,
+                    validator: (value) =>
+                        _validateStudentProfessionalEntry(value),
+                    decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10.0)),
+                        hintText: 'Enter full name',
+                        labelText: 'Full name'),
                   ),
                 ),
-                Expanded(
-                  child: FlatButton(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: <Widget>[
-                        Text(_isStudent ? 'DONE' : 'NEXT'),
-                        Icon(
-                          _isStudent ? Icons.check_circle : Icons.arrow_forward,
-                          size: 24.0,
-                        ),
-                      ],
-                    ),
-                    textColor: Theme.of(context).primaryColor,
-                    onPressed: () async {
-                      focusNode.unfocus();
-                      if (_studentProfessionalFormKey.currentState.validate()) {
-                        if (_isStudent) {
-                          await _submitDataToFirestore();
-                          Alert(
-                            context: context,
-                            type: AlertType.success,
-                            title: "Success!",
-                            desc:
-                                "Your are registered successfully!\nYou will receive a confirmation message soon!",
-                            buttons: [
-                              DialogButton(
-                                child: Text("COOL!",
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .title
-                                        .copyWith(
-                                          color: Colors.white,
-                                        )),
-                                onPressed: () {
-                                  Navigator.of(context).pop();
-                                  Navigator.of(context).pop();
-                                },
-                              )
-                            ],
-                          ).show();
-                        } else {
-                          controller.animateToPage(3,
-                              duration: Duration(milliseconds: 500),
-                              curve: Curves.fastOutSlowIn);
-                        }
-                      }
-                    },
+                Divider(),
+                ListTile(
+                  title: Text(
+                    'What is your gender?',
+                    textAlign: TextAlign.center,
                   ),
-                )
+                ),
+                ListTile(
+                  leading: Radio(
+                    value: 0,
+                    groupValue: 1,
+                    onChanged: (int item) {},
+                  ),
+                  title: Text('Male'),
+                ),
+                ListTile(
+                  leading: Radio(
+                    value: 0,
+                    groupValue: 1,
+                    onChanged: (int item) {},
+                  ),
+                  title: Text('Female'),
+                ),
+                Divider(),
+                ListTile(
+                  title: Text(
+                    'What is your date of birth',
+                    textAlign: TextAlign.center,
+                  ),
+                  subtitle: Text(
+                    'Tap the icon below to select date',
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+                IconButton(
+                  icon: Icon(Icons.date_range),
+                  iconSize: 40.0,
+                  color: Theme.of(context).primaryColor,
+                  onPressed: () {
+                    showDatePicker(
+                      context: context,
+                      initialDate: DateTime.now().add(
+                        Duration(days: 1),
+                      ),
+                      firstDate: DateTime.now(),
+                      lastDate: DateTime.now().add(
+                        Duration(days: 10),
+                      ),
+                    );
+                  },
+                ),
+                Divider(),
+                ListTile(
+                  title: Text(
+                    'Please enter your CNIC/B Form number.',
+                    textAlign: TextAlign.center,
+                  ),
+                  subtitle: Text(
+                    '(without dashes)',
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+                ListTile(
+                  title: TextFormField(
+                    keyboardType: TextInputType.number,
+                    controller: fullNameController,
+                    maxLength: GlobalConstants.cnicMaxLength,
+                    validator: (value) =>
+                        _validateStudentProfessionalEntry(value),
+                    decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10.0)),
+                        hintText: 'Enter CNIC/B Form',
+                        labelText: 'CNIC/B Form'),
+                  ),
+                ),
               ],
-            )
-          ],
-        ),
+            ),
+          ),
+          Divider(),
+          Row(
+            children: <Widget>[
+              Expanded(
+                child: FlatButton(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: <Widget>[
+                      Icon(
+                        Icons.arrow_back,
+                        size: 24.0,
+                      ),
+                      Text('BACK'),
+                    ],
+                  ),
+                  textColor: Theme.of(context).primaryColor,
+                  onPressed: () {
+                    controller.animateToPage(1,
+                        duration: Duration(milliseconds: 500),
+                        curve: Curves.fastOutSlowIn);
+                  },
+                ),
+              ),
+              Expanded(
+                child: FlatButton(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: <Widget>[
+                      Text(_isStudent ? 'DONE' : 'NEXT'),
+                      Icon(
+                        _isStudent ? Icons.check_circle : Icons.arrow_forward,
+                        size: 24.0,
+                      ),
+                    ],
+                  ),
+                  textColor: Theme.of(context).primaryColor,
+                  onPressed: () async {
+                    focusNode.unfocus();
+                    if (_studentProfessionalFormKey.currentState.validate()) {
+                      if (_isStudent) {
+                        await _submitDataToFirestore();
+                        Alert(
+                          context: context,
+                          type: AlertType.success,
+                          title: "Success!",
+                          desc:
+                              "Your are registered successfully!\nYou will receive a confirmation message soon!",
+                          buttons: [
+                            DialogButton(
+                              child: Text("COOL!",
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .title
+                                      .copyWith(
+                                        color: Colors.white,
+                                      )),
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                                Navigator.of(context).pop();
+                              },
+                            )
+                          ],
+                        ).show();
+                      } else {
+                        controller.animateToPage(3,
+                            duration: Duration(milliseconds: 500),
+                            curve: Curves.fastOutSlowIn);
+                      }
+                    }
+                  },
+                ),
+              )
+            ],
+          )
+        ],
       ),
     );
   }
@@ -425,7 +652,7 @@ class RegistrationPageState extends State<RegistrationPage> {
                 right: 32.0,
               ),
               child: Text(
-                'Your designation at ${studentProfessionalController.text}',
+                'Your designation at ${fullNameController.text}',
                 textAlign: TextAlign.center,
                 style: Theme.of(context).textTheme.title,
               ),
@@ -534,7 +761,7 @@ class RegistrationPageState extends State<RegistrationPage> {
 
   String _validateStudentProfessionalEntry(String number) {
     if (number.isEmpty)
-      return '${_isStudent ? 'Institute' : 'Workplace'} required';
+      return 'Name required';
     return null;
   }
 
@@ -545,7 +772,7 @@ class RegistrationPageState extends State<RegistrationPage> {
         await transaction.update(userCache.user.reference, {
           'registration': Registration(
             occupation: _isStudent ? 'Student' : 'Professional',
-            workOrInstitute: studentProfessionalController.text,
+            workOrInstitute: fullNameController.text,
             designation: designationController.text,
           ).toJson(),
           'mobileNumber': mobileNumberController.text,

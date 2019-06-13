@@ -28,13 +28,20 @@ class SchedulePageState extends State<SchedulePage>
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Column(
-          children: <Widget>[
-            CustomAppBar(
-              title: 'Schedule',
+        child: Container(
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage('assets/background.jpg'),
             ),
-            _buildList()
-          ],
+          ),
+          child: Column(
+            children: <Widget>[
+              CustomAppBar(
+                title: 'Schedule',
+              ),
+              _buildList()
+            ],
+          ),
         ),
       ),
     );

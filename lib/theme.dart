@@ -17,7 +17,7 @@ abstract class ColorDictionary {
   };
 }
 
-const Color kBlue = Colors.blue;
+Color kBlue = Colors.green[900];
 final theme = _buildTheme();
 
 ThemeData _buildTheme() {
@@ -27,6 +27,7 @@ ThemeData _buildTheme() {
   return base.copyWith(
     primaryColor: kBlue,
     accentColor: kBlue,
+    buttonColor: kBlue,
     canvasColor: Colors.white,
     scaffoldBackgroundColor: Colors.white,
     appBarTheme: AppBarTheme(

@@ -53,6 +53,7 @@ class HomePageMasterState extends State<HomePageMaster> {
         floatingActionButton: _isLoading
             ? null
             : FloatingActionButton.extended(
+                backgroundColor: Colors.green[900],
                 onPressed: _floatingButtonTapModerator,
                 icon: Icon(floatingButtonIcon),
                 label: Text(floatingButtonLabel),
@@ -294,8 +295,7 @@ class HomePageMasterState extends State<HomePageMaster> {
         fullscreenDialog: true,
       ),
     );
-    var user =
-        await userCache.getUser(userCache.user.id, useCached: false);
+    var user = await userCache.getUser(userCache.user.id, useCached: false);
     setState(() {
       _user = user;
     });

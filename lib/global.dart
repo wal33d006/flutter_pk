@@ -14,6 +14,7 @@ abstract class GlobalConstants {
   static const int phoneNumberMaxLength = 13;
   static const String breakId = 'break';
   static const int entryMaxLength = 50;
+  static const int cnicMaxLength = 13;
   static const String qrKey = "thisisahighlyencryptedaubykhanstringthatisbeingusedforfluttermeetupqrscan";
   static const String addNumberDisplayText =
       'Add your phone number in order to receive event updates.';
